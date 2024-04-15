@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../model/Item.dart';
 import "package:provider/provider.dart";
 import "../provider/shoppingcart_provider.dart";
+import 'MyCheckout.dart';
 
 class MyCart extends StatelessWidget {
   const MyCart({super.key});
@@ -14,6 +15,7 @@ class MyCart extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           getItems(context),
+          computeCost(),
           const Divider(height: 4, color: Colors.black),
           Flexible(
               child: Center(
@@ -25,6 +27,13 @@ class MyCart extends StatelessWidget {
                       context.read<ShoppingCart>().removeAll();
                     },
                     child: const Text("Reset")),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyCheckout()));
+                  },
+                  child: const Text("Checkout"),
+                )
               ]))),
           TextButton(
             child: const Text("Go back to Product Catalog"),
@@ -78,5 +87,11 @@ class MyCart extends StatelessWidget {
               )),
             ],
           ));
+  }
+
+  Widget computeCost() {
+    return Consumer<ShoppingCart>(builder: (context, cart, child) {
+      return Text("Total: ${cart.cartTotal}");
+    });
   }
 }

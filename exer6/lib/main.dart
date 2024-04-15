@@ -3,6 +3,7 @@ import 'screen/MyCart.dart';
 import 'screen/MyCatalog.dart';
 import 'package:provider/provider.dart';
 import 'provider/shoppingcart_provider.dart';
+import 'screen/MyCheckout.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/cart": (context) => const MyCart(),
         "/products": (context) => const MyCatalog(),
+        "/checkout": (context) => const MyCheckout(),
       },
       home: const MyCatalog(),
     );
